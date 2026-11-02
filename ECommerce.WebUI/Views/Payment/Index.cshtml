@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4 text-center">Payment</h2>
+
+                    <form asp-controller="Payment"
+                          asp-action="Pay"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Card Holder Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="John Doe"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Card Number
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="1234 5678 9012 3456"
+                                   maxlength="19"
+                                   required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Expiry Date
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="MM/YY"
+                                       maxlength="5"
+                                       required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    CVV
+                                </label>
+
+                                <input type="password"
+                                       class="form-control"
+                                       placeholder="123"
+                                       maxlength="3"
+                                       required />
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-success w-100">
+                            Pay Now
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="ECommerce.Business/VOVOS.Business.csproj" Id="6d9affb8-85b0-4c5e-b5f3-52e88b8de3d7" />
+  <Project Path="ECommerce.com.Core/VOVOS.Core.csproj" Id="83be6287-0d64-464a-afef-843271fc3c43" />
+  <Project Path="ECommerce.DataAccess/VOVOS.DataAccess.csproj" Id="12cdbe1b-4ee9-4762-a406-945ad36c9004" />
+  <Project Path="ECommerce.Entities/VOVOS.Entities.csproj" />
+  <Project Path="ECommerce.WebAPI/VOVOS.WebAPI.csproj" Id="22bf147f-1deb-4dfe-a554-0d870ac0e6ba" />
+  <Project Path="ECommerce.WebUI/VOVOS.WebUI.csproj" Id="20d2e511-508b-40a0-8b4e-3ebaf0386496" />
+</Solution>

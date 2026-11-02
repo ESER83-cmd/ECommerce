@@ -1,0 +1,446 @@
+﻿
+@{
+    var categories = new[]
+    {
+        "Wallet",
+        "Belt",
+        "Bracelet",
+        "Keychain",
+        "Card Holder"
+    };
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - VOVOS Leather Store</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/cart-drawer.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/ECommerce.WebUI.styles.css"
+          asp-append-version="true" />
+
+    <style>
+        :root {
+            --leather-dark: #382319;
+            --leather-brown: #75472e;
+            --leather-medium: #a36d48;
+            --leather-light: #d8b28e;
+            --leather-cream: #f8f2e9;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            background-color: var(--leather-cream);
+            color: var(--leather-dark);
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            background-color: var(--leather-dark) !important;
+            padding: 18px 0;
+            border-bottom: 2px solid var(--leather-medium);
+        }
+
+        .navbar-brand {
+            color: #fff5e9 !important;
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .navbar .nav-link {
+            color: #f5e6d5 !important;
+            font-size: 15px;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--leather-light) !important;
+        }
+
+        .navbar-toggler {
+            border-color: var(--leather-light);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Categories */
+
+        .dropdown-menu {
+            background-color: #fffaf4;
+            border: 1px solid var(--leather-light);
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            color: var(--leather-dark);
+            padding: 10px 18px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #e9d4bd;
+            color: var(--leather-dark);
+        }
+
+        /* Main Content */
+
+        main {
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Buttons */
+
+        .btn-dark {
+            background-color: var(--leather-brown);
+            border-color: var(--leather-brown);
+        }
+
+        .btn-dark:hover {
+            background-color: var(--leather-dark);
+            border-color: var(--leather-dark);
+        }
+
+        .btn-outline-dark {
+            color: var(--leather-dark);
+            border-color: var(--leather-brown);
+        }
+
+        .btn-outline-dark:hover {
+            background-color: var(--leather-brown);
+            border-color: var(--leather-brown);
+            color: white;
+        }
+
+        /* Footer */
+
+        .footer {
+            background-color: var(--leather-dark);
+            color: #f5e6d5;
+            padding: 35px 0 25px;
+            margin-top: auto;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-brand {
+            font-size: 21px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--leather-light);
+            margin-bottom: 12px;
+        }
+
+        .footer-description {
+            color: #f5e6d5;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact-title {
+            color: var(--leather-light);
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact {
+            color: #f5e6d5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-contact:hover {
+            color: var(--leather-light);
+        }
+
+        .footer-divider {
+            border-color: var(--leather-light);
+            opacity: 0.4;
+            margin: 25px 0 20px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #e5d3c2;
+            margin-bottom: 0;
+        }
+
+        @@media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 20px;
+            }
+
+            .footer {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <!-- Brand -->
+                <a class="navbar-brand"
+                   asp-area=""
+                   asp-controller="Home"
+                   asp-action="Index">
+                    VOVOS Leather
+                </a>
+
+                <!-- Mobile Navigation -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent"
+                        aria-controls="navbarContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse"
+                     id="navbarContent">
+
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <!-- Home -->
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+
+                        <!-- Login -->
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Account"
+                               asp-action="Login">
+                                Login
+                            </a>
+                        </li>
+
+                        <!-- Categories -->
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="categoriesDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Categories
+                            </a>
+
+                            <ul class="dropdown-menu"
+                                aria-labelledby="categoriesDropdown">
+
+                                @foreach (var category in categories)
+                                {
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Products"
+                                           asp-action="Index"
+                                           asp-route-category="@category">
+                                            @category
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+
+                        <!-- Cart -->
+                        <li class="nav-item">
+                            <button class="nav-link btn btn-link"
+                                    type="button"
+                                    id="openCartDrawer"
+                                    aria-controls="cartDrawer"
+                                    aria-haspopup="dialog">
+                                Cart
+                            </button>
+                        </li>
+
+                        <!-- Products -->
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Products"
+                               asp-action="Index">
+                                Products
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="pb-4">
+        @RenderBody()
+    </main>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay"
+         id="cartOverlay"
+         hidden>
+    </div>
+
+    <!-- Shopping Cart Drawer -->
+    <aside class="cart-drawer"
+           id="cartDrawer"
+           role="dialog"
+           aria-modal="true"
+           aria-label="My Cart"
+           aria-hidden="true"
+           data-cart-url="@Url.Action("Index", "Cart")">
+
+        <!-- Drawer Header -->
+        <div class="cart-drawer-header">
+
+            <h4 id="cartDrawerTitle">
+                My Cart
+            </h4>
+
+            <button type="button"
+                    class="cart-close"
+                    id="closeCartDrawer"
+                    aria-label="Close cart">
+                &times;
+            </button>
+
+        </div>
+
+        <!-- Cart Products -->
+        <div id="cartDrawerItems"
+             class="cart-drawer-items"
+             aria-live="polite">
+
+            <p>Open the cart to see your products.</p>
+
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="cart-drawer-footer">
+
+            <div class="cart-drawer-total">
+
+                <strong>Cart Total</strong>
+
+                <strong id="cartDrawerTotal">
+                    0,00 kr
+                </strong>
+
+            </div>
+
+            <div class="cart-drawer-buttons">
+
+                <a asp-controller="Cart"
+                   asp-action="Index"
+                   class="cart-view-btn">
+                    Go to Cart
+                </a>
+
+                <a asp-controller="Payment"
+                   asp-action="Index"
+                   class="cart-checkout-btn">
+                    Checkout
+                </a>
+
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+
+            <h5 class="footer-brand">
+                VOVOS LEATHER STORE
+            </h5>
+
+            <p class="footer-description">
+                Genuine Leather Products
+            </p>
+
+            <!-- Contact Information -->
+            <h6 class="footer-contact-title">
+                Contact Us
+            </h6>
+
+            <p>
+                <a href="mailto:info@vovosleather.com"
+                   class="footer-contact">
+                    &#9993; info@vovosleather.com
+                </a>
+            </p>
+
+            <p>
+                <a href="tel:+46700000000"
+                   class="footer-contact">
+                    &#9742; +46 70 000 00 00
+                </a>
+            </p>
+
+            <hr class="footer-divider" />
+
+            <p class="footer-copyright">
+                &copy; @DateTime.Now.Year VOVOS Leather Store.
+                All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    <script src="~/js/cart-drawer.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+@ECommerce.WebAPI_HostAddress = https://localhost:7208
+@token = YOUR_JWT_TOKEN_HERE
+
+POST {{ECommerce.WebAPI_HostAddress}}/api/categories
+Content-Type: application/json
+
+{
+  "name": "Cüzdan",
+  "description": "Deri cüzdan ürünleri",
+  "isActive": true
+}
+###
+
+GET {{ECommerce.WebAPI_HostAddress}}/api/categories
+Accept: application/json
+
+###
+POST {{ECommerce.WebAPI_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Classic Leather Belt",
+  "description": "Handmade genuine leather belt",
+  "price": 79.90,
+  "stock": 20,
+  "imageUrl": "classic-leather-belt.jpg",
+  "isActive": true,
+  "categoryId": 1
+}
+
+###
+### Update Category
+PUT {{ECommerce.WebAPI_HostAddress}}/api/categories/2
+Content-Type: application/json
+
+{
+  "name": "Leather Wallet",
+  "description": "Handmade genuine leather wallets",
+  "isActive": true
+}
+
+###
+
+GET {{ECommerce.WebAPI_HostAddress}}/api/products
+Accept: application/json
+### Get Category By Id
+GET {{ECommerce.WebAPI_HostAddress}}/api/categories/2
+Accept: application/json
+
+###
+### Delete Category
+DELETE {{ECommerce.WebAPI_HostAddress}}/api/categories/2
+
+  ### Get Product By Id
+GET {{ECommerce.WebAPI_HostAddress}}/api/products/2
+Accept: application/json
+
+### Update Product
+PUT {{ECommerce.WebAPI_HostAddress}}/api/products/2
+Content-Type: application/json
+
+{
+  "name": "Premium Leather Belt",
+  "description": "Premium handmade genuine leather belt",
+  "price": 89.90,
+  "stock": 15,
+  "imageUrl": "premium-leather-belt.jpg",
+  "isActive": true,
+  "categoryId": 1
+}
+
+###  Delete Product
+DELETE {{ECommerce.WebAPI_HostAddress}}/api/products/2
+
+### Register User
+POST {{ECommerce.WebAPI_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Eser",
+  "lastName": "Tepe",
+  "email": "eser.test@example.com",
+  "password": "Test123!"
+}
+### Login User
+POST {{ECommerce.WebAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "eser.test@example.com",
+  "password": "Test123!"
+}
+### Get All Products
+GET {{ECommerce.WebAPI_HostAddress}}/api/products
+Accept: application/json
+Authorization:Bearer  {{token}}
+
+
+### Customer ile ürün eklemeyi dene test
+POST {{ECommerce.WebAPI_HostAddress}}/api/products
+Content-Type: application/json
+Authorization: Bearer  {{token}}
+
+
+{
+  "name": "Test Product",
+  "description": "Yetki testi",
+  "price": 100,
+  "stock": 10,
+  "imageUrl": "test.jpg",
+  "isActive": true,
+  "categoryId": 1
+}
+### Login User
+POST {{ECommerce.WebAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "eser.test@example.com",
+  "password": "Test123!"
+}
+### Register Admin
+POST {{ECommerce.WebAPI_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Eser",
+  "lastName": "Admin",
+  "email": "admin@ecommerce.com",
+  "password": "Admin123!"
+}
+### ADMIN LOGIN - NEW TOKEN
+POST {{ECommerce.WebAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@ecommerce.com",
+  "password": "Admin123!"
+}
+
+### ADMIN PRODUCT TEST
+POST {{ECommerce.WebAPI_HostAddress}}/api/products
+Content-Type: application/json
+Authorization: Bearer  {{token}}
+
+{
+  "name": "Admin Test Product",
+  "description": "Admin yetki testi",
+  "price": 100,
+  "stock": 10,
+  "imageUrl": "admin-test.jpg",
+  "isActive": true,
+  "categoryId": 1
+}
+### ADMIN CATEGORY TEST
+POST {{ECommerce.WebAPI_HostAddress}}/api/categories
+Content-Type: application/json
+Authorization: Bearer  {{token}}
+
+{
+  "name": "Elektronik",
+  "description": "Elektronik ürünler",
+  "isActive": true
+}
+### ADMIN CATEGORY UPDATE TEST
+PUT {{ECommerce.WebAPI_HostAddress}}/api/categories/3
+Content-Type: application/json
+Authorization: Bearer  {{token}}
+{
+  "id": 3,
+  "name": "Elektronik Güncel",
+  "description": "Güncellenmiş elektronik ürünler",
+  "isActive": true
+}
+### ADMIN CATEGORY DELETE TEST
+DELETE {{ECommerce.WebAPI_HostAddress}}/api/categories/3
+Authorization: Bearer  {{token}}
+
+### CART - ADD ITEM
+POST {{ECommerce.WebAPI_HostAddress}}/api/cart?userId=1&productId=3&quantity=10
+
+### CART - GET USER CART
+GET {{ECommerce.WebAPI_HostAddress}}/api/cart/1
+
+### CART - UPDATE QUANTITY
+PUT {{ECommerce.WebAPI_HostAddress}}/api/cart/3?quantity=5
+
+### CART - REMOVE ITEM
+DELETE {{ECommerce.WebAPI_HostAddress}}/api/cart/2
+
+### ORDER - CREATE ORDER
+POST {{ECommerce.WebAPI_HostAddress}}/api/order/1
+
+### ORDER - GET USER ORDERS
+GET {{ECommerce.WebAPI_HostAddress}}/api/order/user/1
+
+### ORDER - UPDATE STATUS
+PUT {{ECommerce.WebAPI_HostAddress}}/api/order/7/status?status=Cancelled
+
+### ADMIN - GET ALL ORDERS
+GET {{ECommerce.WebAPI_HostAddress}}/api/order/all
+Authorization: Bearer  {{token}}
+
+### PAYMENT - CREATE
+POST {{ECommerce.WebAPI_HostAddress}}/api/payment/7?paymentMethod=Card
+
+### PRODUCT - SEARCH
+GET {{ECommerce.WebAPI_HostAddress}}/api/products/search?searchTerm=Admin
+Authorization: Bearer  {{token}}
+
+
+### PRODUCT - FILTER BY CATEGORY
+GET {{ECommerce.WebAPI_HostAddress}}/api/products/category/1
+Authorization: Bearer  {{token}}
+
+
+### PRODUCT - FILTER BY PRICE
+GET {{ECommerce.WebAPI_HostAddress}}/api/products/filter?minPrice=100&maxPrice=500
+Authorization: Bearer  {{token}}

@@ -1,0 +1,119 @@
+﻿@model List<ECommerce.WebUI.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Products</h2>
+
+    <div class="row">
+
+        @foreach (var product in Model)
+        {
+            var imageUrl = product.ImageUrl ?? "";
+
+            if (string.IsNullOrWhiteSpace(imageUrl))
+            {
+                imageUrl = "/Images/Products/no-image.png";
+            }
+            else if (imageUrl.StartsWith("~/"))
+            {
+                imageUrl = Url.Content(imageUrl);
+            }
+            else if (imageUrl.StartsWith("/"))
+            {
+                // The database already contains the full image path.
+            }
+            else
+            {
+                // The database contains only the file name.
+                imageUrl = "/Images/Products/" + imageUrl;
+            }
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card h-100 shadow-sm">
+
+                    <!-- Product Image -->
+                    <a asp-controller="Products"
+                       asp-action="Details"
+                       asp-route-id="@product.Id">
+
+                        <img src="@imageUrl"
+                             class="card-img-top"
+                             alt="@product.Name"
+                             style="height:250px; object-fit:cover;" />
+
+                    </a>
+
+                    <!-- Product Information -->
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="card-title">
+
+                            <a asp-controller="Products"
+                               asp-action="Details"
+                               asp-route-id="@product.Id"
+                               class="text-decoration-none text-dark">
+
+                                @product.Name
+
+                            </a>
+
+                        </h5>
+
+                        <p class="card-text">
+                            @product.Description
+                        </p>
+
+                        <p class="card-text fw-bold">
+                            @product.Price.ToString("0.00") kr
+                        </p>
+
+                        <p>
+                            Stock: @product.Stock
+                        </p>
+
+                        <!-- Product Details -->
+                        <a asp-controller="Products"
+                           asp-action="Details"
+                           asp-route-id="@product.Id"
+                           class="btn btn-outline-dark mb-2 mt-auto">
+
+                            View Details
+
+                        </a>
+
+                        <!-- Add to Cart -->
+                        <form asp-controller="Cart"
+                              asp-action="Add"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="productId"
+                                   value="@product.Id" />
+
+                            <button type="submit"
+                                    class="btn btn-dark w-100"
+                                    disabled="@(product.Stock <= 0)">
+
+                                Add to Cart
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>            

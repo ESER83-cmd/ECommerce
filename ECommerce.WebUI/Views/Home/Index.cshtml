@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .vovos-hero {
+        min-height: 680px;
+        display: flex;
+        align-items: center;
+        background:
+            radial-gradient(
+                ellipse at 75% 40%,
+                rgba(228, 151, 91, 0.65),
+                transparent 55%
+            ),
+            linear-gradient(
+                115deg,
+                #492415 0%,
+                #814326 48%,
+                #ad6940 75%,
+                #4a2518 100%
+            );
+        color: #fff3e8;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .vovos-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            transparent 45%,
+            rgba(255, 216, 171, 0.18) 60%,
+            transparent 75%
+        );
+        pointer-events: none;
+    }
+
+    .vovos-content {
+        position: relative;
+        z-index: 1;
+        padding: 70px 7%;
+    }
+
+    .vovos-subtitle {
+        font-size: 15px;
+        letter-spacing: 6px;
+        margin-bottom: 25px;
+    }
+
+    .vovos-title {
+        font-size: clamp(40px, 5vw, 76px);
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
+    .vovos-description {
+        font-size: clamp(18px, 2vw, 28px);
+        font-weight: 300;
+        margin-bottom: 40px;
+    }
+
+    .vovos-button {
+        display: inline-block;
+        padding: 16px 50px;
+        background: #2d160e;
+        color: white;
+        border: 1px solid #c59a78;
+        border-radius: 7px;
+        font-size: 22px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .vovos-button:hover {
+        background: #5c301d;
+        color: white;
+    }
+</style>
+
+<section class="vovos-hero">
+    <div class="vovos-content">
+
+        <p class="vovos-subtitle">
+            PREMIUM LEATHER GOODS
+        </p>
+
+        <h1 class="vovos-title">
+            VOVOS Leather Store
+        </h1>
+
+        <p class="vovos-description">
+            Discover our products and start shopping.
+        </p>
+
+        <a asp-controller="Products"
+           asp-action="Index"
+           class="vovos-button">
+            Shop Now
+        </a>
+
+    </div>
+</section>
